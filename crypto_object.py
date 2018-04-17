@@ -16,6 +16,7 @@ class Coin():
 			file path for data object 
 	"""
 
+
 	def __init__(self, name, data_path):
 		self.name = name
 		self.full_data = pd.read_csv(data_path, parse_dates=['Date'])
