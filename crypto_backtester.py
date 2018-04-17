@@ -16,7 +16,6 @@ def load_coins(dir_):
     Function to take in a directory containing data
     and return a dictionary of `Coin` objects
     """
-    
     # to store data
     coin_dict = {}
     
