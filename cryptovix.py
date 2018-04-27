@@ -132,7 +132,7 @@ def cryptoVix(coin, current_date, r, N_iter, N_paths):
         sigma_2_next = (np.exp(r * T_2) * delta_next * (2 / T_2) * next_sum) - \
             ((1 / T_2) * (((F_next / np.nanmean([k_0_next_call, k_0_next_put])) - 1)**2))
 
-        vix[i] = 100 * np.sqrt((T_1 * sigma_2_near) + (T_2 * sigma_2_next) * (365/30))
+        vix[i] = 100 * np.sqrt(((T_1 * sigma_2_near) + (T_2 * sigma_2_next)) * (365/30))
         
     return(np.nanmean(vix))
 
