@@ -118,7 +118,21 @@ def empirical_method(coin, current_date, expiry_date, r, K, call_or_put, lookbac
 	emp_price = np.nanmean(payout) * discount_factor
 
 	# ensure that these prices obey the call /put inequalities
-	# TODO
+	if call_or_put == 'call':
+
+		# call bounds S_t > C_k > max(S_t - KZ(t, T), 0)
+		if emp_price < np.nanmax([np.nanmean(rps.iloc[-1, :] - (K * discount_factor)), 0]):
+			return np.nanmax([np.nanmean(rps.iloc[-1, :] - (K * discount_factor)), 0])
+		elif emp_price > np.nanmean(rps.iloc[-1, :]):
+			return np.nanmean(rps.iloc[-1, :])
+
+	else:
+
+		# max(KZ(t, T) - S_t, 0) < P_k < KZ(t,T)
+		if emp_price < np.nanmax([np.nanmean((K * discount_factor) - rps.iloc[-1, :]), 0]):
+			return np.nanmax([np.nanmean((K * discount_factor) - rps.iloc[-1, :]), 0])
+		elif emp_price > (K * discount_factor):
+			return (K * discount_factor)
 
 	return emp_price
 
